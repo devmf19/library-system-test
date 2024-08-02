@@ -18,9 +18,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/loan")
 public class InvoiceController {
-    
+
     private final InvoiceService invoiceService;
-    
+
     @Autowired
     public InvoiceController(InvoiceService invoiceService) {
         this.invoiceService = invoiceService;
@@ -51,7 +51,6 @@ public class InvoiceController {
     }
 
     @GetMapping("/r/{id}")
-    @PreAuthorize(Constants.ADMIN_ROLE)
     public ResponseEntity<ResponseDto<InvoiceResponseDto>> readById(@Min(value = 1) @PathVariable("id") Long id) {
         return new ResponseEntity<>(
                 ResponseDto.<InvoiceResponseDto>builder()
@@ -64,13 +63,12 @@ public class InvoiceController {
 
     }
 
-    @PutMapping("/u/{id}")
-    public ResponseEntity<ResponseDto<InvoiceResponseDto>> modify(@Min(value = 1) @PathVariable("id") Long id,
-                                                               @Validated @RequestBody InvoiceRequestDto invoiceRequestDto) {
+    @PutMapping("/receive/{id}")
+    public ResponseEntity<ResponseDto<InvoiceResponseDto>> receiveBooks(@Min(value = 1) @PathVariable("id") Long id) {
         return new ResponseEntity<>(
                 ResponseDto.<InvoiceResponseDto>builder()
-                        .data(invoiceService.modify(id, invoiceRequestDto))
-                        .message(Constants.UPDATED_BOOK_LOAN)
+                        .data(invoiceService.modify(id))
+                        .message(Constants.RECEIVED_BOOK_LOAN)
                         .status(HttpStatus.OK)
                         .build(),
                 HttpStatus.OK

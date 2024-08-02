@@ -59,17 +59,6 @@ public class GlobalSecurityExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ResponseDto<String>> handleIllegalArgumentException(IllegalArgumentException ex) {
-        ResponseDto<String> response = ResponseDto.<String>builder()
-                .data(SecurityConstants.EMPTY_TOKEN)
-                .status(HttpStatus.UNAUTHORIZED)
-                .message(ex.getMessage())
-                .build();
-
-        return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
-    }
-
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ResponseDto<String>> handleIllegalArgumentException(BadCredentialsException ex) {
         ResponseDto<String> response = ResponseDto.<String>builder()

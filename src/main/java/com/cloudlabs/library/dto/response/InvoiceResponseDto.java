@@ -15,7 +15,7 @@ public class InvoiceResponseDto {
     private LocalDateTime startDate;
     private LocalDateTime finalDate;
     private String comments;
-    private char state;
+    private String status;
     private List<InvoiceItemResponseDto> books;
     private MemberResponseDto member;
     private UserResponseDto user;

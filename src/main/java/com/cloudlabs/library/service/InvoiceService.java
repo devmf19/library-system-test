@@ -12,7 +12,7 @@ public interface InvoiceService {
 
     InvoiceResponseDto readById(Long id);
 
-    InvoiceResponseDto modify(Long id, InvoiceRequestDto invoiceRequestDto);
+    InvoiceResponseDto modify(Long id);
 
     void remove(Long id);
 }

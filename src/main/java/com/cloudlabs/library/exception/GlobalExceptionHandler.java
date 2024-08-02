@@ -1,6 +1,7 @@
 package com.cloudlabs.library.exception;
 
 import com.cloudlabs.library.dto.response.ResponseDto;
+import com.cloudlabs.library.security.util.SecurityConstants;
 import com.cloudlabs.library.util.Constants;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -55,7 +56,18 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    /*@ExceptionHandler(Exception.class)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ResponseDto<String>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        ResponseDto<String> response = ResponseDto.<String>builder()
+                .data(Constants.VALIDATION_ERROR)
+                .status(HttpStatus.BAD_REQUEST)
+                .message(ex.getMessage())
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(Exception.class)
     public ResponseEntity<ResponseDto<String>> handleGenericException(Exception ex) {
         ResponseDto<String> response = ResponseDto.<String>builder()
                 .data(null)
@@ -64,5 +76,5 @@ public class GlobalExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }*/
+    }
 }

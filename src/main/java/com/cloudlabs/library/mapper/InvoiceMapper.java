@@ -10,19 +10,20 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {BookMapperImpl.class, MemberMapper.class, UserMapper.class})
+@Mapper(componentModel = "spring", uses = {BookMapper.class, MemberMapper.class, UserMapper.class})
 public interface InvoiceMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "member", ignore = true)
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "status", ignore = true)
     Invoice toEntity(InvoiceRequestDto invoiceRequestDto);
 
     @Mapping(target = "books", ignore = true)
+    @Mapping(target = "status", expression = "java(invoice.getStatus().getStatus().name())")
     InvoiceResponseDto toResponse(Invoice invoice);
 
     List<InvoiceResponseDto> toResponseList(List<Invoice> invoice);
-
 
     InvoiceItemResponseDto itemToResponse(InvoiceItem invoiceItem);
 

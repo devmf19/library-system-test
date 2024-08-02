@@ -26,8 +26,9 @@ public class Invoice {
     @Column(name = "comments")
     private String comments;
 
-    @Column(name = "state")
-    private char state;
+    @ManyToOne
+    @JoinColumn(name = "status_id", nullable = false)
+    private InvoiceStatus status;
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)

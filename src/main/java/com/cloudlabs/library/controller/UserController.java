@@ -71,7 +71,7 @@ public class UserController {
         return new ResponseEntity<>(
                 ResponseDto.<UserResponseDto>builder()
                         .data(userService.modify(id, userRequestDto))
-                        .message(Constants.UPDATED_BOOK)
+                        .message(Constants.UPDATED_USER)
                         .status(HttpStatus.OK)
                         .build(),
                 HttpStatus.OK
@@ -84,7 +84,7 @@ public class UserController {
         return new ResponseEntity<>(
                 ResponseDto.<UserResponseDto>builder()
                         .data(userService.addRoles(id, addRolesRequestDto))
-                        .message(Constants.UPDATED_BOOK)
+                        .message(Constants.UPDATED_USER)
                         .status(HttpStatus.OK)
                         .build(),
                 HttpStatus.OK

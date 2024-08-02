@@ -25,8 +25,6 @@ public class InvoiceRequestDto {
 
     private String comments;
 
-    private char state;
-
     @NotNull(message = Constants.REQUIRED_MEMBER_ID)
     @Min(value = 1, message = Constants.INVALID_ID)
     private Long memberId;

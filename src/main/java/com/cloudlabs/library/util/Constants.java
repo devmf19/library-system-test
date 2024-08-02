@@ -26,11 +26,10 @@ public class Constants {
     public static final String NOT_FOUND_MEMBER = "No se ha encontrado un miembro con id ";
     public static final String NOT_FOUND_SECTION = "No se ha encontrado una sección con id ";
     public static final String NOT_FOUND_USER = "No se ha encontrado un usuario con id ";
-    public static final String NOT_FOUND_USERNAME = "No se ha encontrado un usuario con nombre de usuario:  ";
+    public static final String OLD_BOOK_LOAN_RECEIVED = "Este préstamo ya fue devuelto";
     public static final String RECEIVED_BOOK_LOAN = "Devolución recibida. Id de préstamo: ";
     public static final String REQUIRED_ADDRESS = "Debe ingresar una dirección";
     public static final String REQUIRED_AUTHORS_ID = "Debe ingresar al menos un ID de autor";
-    public static final String REQUIRED_BOOK_ID = "Debe ingresar el ID de un libro registrado";
     public static final String REQUIRED_BOOKS_ID = "Debe ingresar al menos un ID de de libro";
     public static final String REQUIRED_END_DATE = "Debe establecer una fecha de devolución";
     public static final String REQUIRED_ISBN = "Debe ingresar un ISBN único";
@@ -47,7 +46,6 @@ public class Constants {
     public static final String SUCCESS = "Operación exitosa";
     public static final String UPDATED_AUTHOR = "Autor modificado ";
     public static final String UPDATED_BOOK = "Libro modificado ";
-    public static final String UPDATED_BOOK_LOAN = "Préstamo modificado ";
     public static final String UPDATED_MEMBER = "Cliente modificado ";
     public static final String UPDATED_SECTION = "Sección modificada ";
     public static final String UPDATED_USER = "Usuario modificado ";
