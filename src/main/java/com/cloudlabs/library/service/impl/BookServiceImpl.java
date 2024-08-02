@@ -62,11 +62,7 @@ public class BookServiceImpl extends GenericServiceImpl<Book, Long> implements B
         book.setAuthors(authors);
         book.setSection(section);
 
-        return bookMapper.toResponse(
-                this.save(
-                        bookMapper.toEntity(bookRequestDto)
-                )
-        );
+        return bookMapper.toResponse(this.save(book));
     }
 
     @Override
