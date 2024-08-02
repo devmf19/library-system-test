@@ -17,6 +17,7 @@ public interface InvoiceMapper {
     @Mapping(target = "member", ignore = true)
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "status", ignore = true)
+    @Mapping(target = "startDate", ignore = true)
     Invoice toEntity(InvoiceRequestDto invoiceRequestDto);
 
     @Mapping(target = "books", ignore = true)

@@ -80,6 +80,23 @@ public class BookServiceImpl extends GenericServiceImpl<Book, Long> implements B
                 .map(book -> {
                     Book updatedBook = bookMapper.toEntity(bookRequestDto);
                     updatedBook.setId(book.getId());
+
+                    Set<Author> authors = new HashSet<>();
+
+                    bookRequestDto.getAuthorsId().forEach(authorId -> {
+                        Author author = findSaveAuthorService.get(authorId).orElseThrow(
+                                () -> new EntityNotFoundException(Constants.NOT_FOUND_AUTHOR.concat(authorId.toString()))
+                        );
+                        authors.add(author);
+                    });
+
+                    Section section = findSaveSectionService.get(bookRequestDto.getSectionId()).orElseThrow(
+                            () -> new EntityNotFoundException(Constants.NOT_FOUND_SECTION.concat(bookRequestDto.getSectionId().toString()))
+                    );
+
+                    updatedBook.setAuthors(authors);
+                    updatedBook.setSection(section);
+
                     return updatedBook;
                 })
                 .map(this::save)

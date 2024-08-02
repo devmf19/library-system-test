@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -17,21 +17,14 @@ import java.util.Set;
 @NoArgsConstructor
 public class InvoiceRequestDto {
 
-    @NotBlank(message = Constants.REQUIRED_START_DATE)
-    private LocalDateTime startDate;
-
-    @NotBlank(message = Constants.REQUIRED_END_DATE)
-    private LocalDateTime finalDate;
+    @NotNull(message = Constants.REQUIRED_END_DATE)
+    private LocalDate finalDate;
 
     private String comments;
 
     @NotNull(message = Constants.REQUIRED_MEMBER_ID)
     @Min(value = 1, message = Constants.INVALID_ID)
     private Long memberId;
-
-    @NotNull(message = Constants.REQUIRED_USER_ID)
-    @Min(value = 1, message = Constants.INVALID_ID)
-    private Long userId;
 
     @NotNull(message = Constants.REQUIRED_BOOKS_ID)
     @Valid

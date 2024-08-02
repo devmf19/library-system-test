@@ -20,7 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/member")
-@Tag(name = "Mimebros", description = "Miembros que realizan préstamos de libros de la biblioteca")
+@Tag(name = "Miembros", description = "Miembros que realizan préstamos de libros de la biblioteca")
 public class MemberController {
 
     private final MemberService memberService;

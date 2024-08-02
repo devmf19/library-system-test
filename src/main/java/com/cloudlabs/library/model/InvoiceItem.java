@@ -1,10 +1,7 @@
 package com.cloudlabs.library.model;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -12,7 +9,7 @@ import java.io.Serializable;
 @Table(name = "invoice_item")
 @Getter
 @Setter
-@Builder
+@NoArgsConstructor
 public class InvoiceItem implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,6 +1,7 @@
 package com.cloudlabs.library.service.impl;
 
 import com.cloudlabs.library.dto.request.InvoiceRequestDto;
+import com.cloudlabs.library.dto.response.InvoiceItemResponseDto;
 import com.cloudlabs.library.dto.response.InvoiceResponseDto;
 import com.cloudlabs.library.enums.InvoiceStatusEnum;
 import com.cloudlabs.library.mapper.InvoiceMapper;
@@ -18,6 +19,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -67,14 +69,23 @@ public class InvoiceServiceImpl extends GenericServiceImpl<Invoice, Long> implem
 
         invoice.setUser(user);
         invoice.setMember(member);
+        invoice.setStartDate(LocalDate.now());
 
         return invoiceItemService.create(invoiceRequestDto.getBooksId(), this.save(invoice));
     }
 
     @Override
     public InvoiceResponseDto readById(Long id) {
+        Invoice invoice = this.findById(id).orElseThrow(
+                () -> new EntityNotFoundException(Constants.NOT_FOUND_INVOICE.concat(id.toString()))
+        );
+
         return this.findById(id)
                 .map(invoiceMapper::toResponse)
+                .map(invoiceResponseDto -> {
+                    invoiceResponseDto.setBooks(invoiceItemService.readByInvoice(invoice));
+                    return invoiceResponseDto;
+                })
                 .orElseThrow(
                         () -> new EntityNotFoundException(Constants.NOT_FOUND_INVOICE.concat(id.toString()))
                 );
@@ -91,10 +102,15 @@ public class InvoiceServiceImpl extends GenericServiceImpl<Invoice, Long> implem
             throw new EntityNotFoundException(Constants.OLD_BOOK_LOAN_RECEIVED);
         }
 
+        List<InvoiceItemResponseDto> itemResponseDtoList = invoiceItemService.readByInvoice(invoice);
+
         invoice.setStatus(invoiceStatusService.readByStatus(InvoiceStatusEnum.RETURNED));
         invoiceItemService.increaseStockForAllBooks(invoice);
 
-        return invoiceMapper.toResponse(this.save(invoice));
+        InvoiceResponseDto invoiceResponseDto = invoiceMapper.toResponse(this.save(invoice));
+        invoiceResponseDto.setBooks(itemResponseDtoList);
+
+        return invoiceResponseDto;
     }
 
     @Override

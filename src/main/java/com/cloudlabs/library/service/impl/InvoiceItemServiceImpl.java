@@ -47,16 +47,19 @@ public class InvoiceItemServiceImpl implements InvoiceItemService {
                     }
                 })
                 .forEach(book -> {
-                    invoiceItemRepository.save(InvoiceItem.builder()
-                            .invoice(invoice)
-                            .book(book)
-                            .build()
-                    );
+                    InvoiceItem invoiceItem = new InvoiceItem();
+                    invoiceItem.setInvoice(invoice);
+                    invoiceItem.setBook(book);
+                    invoiceItemRepository.save(invoiceItem);
+
                     book.setStock(book.getStock() - 1);
                     findSaveBookService.post(book);
                 });
 
-        return invoiceMapper.toResponse(invoice);
+        InvoiceResponseDto invoiceResponseDto = invoiceMapper.toResponse(invoice);
+        invoiceResponseDto.setBooks(readByInvoice(invoice));
+
+        return invoiceResponseDto;
     }
 
     @Override

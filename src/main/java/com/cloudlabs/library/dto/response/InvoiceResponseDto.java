@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -12,8 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class InvoiceResponseDto {
     private Long id;
-    private LocalDateTime startDate;
-    private LocalDateTime finalDate;
+    private LocalDate startDate;
+    private LocalDate finalDate;
     private String comments;
     private String status;
     private List<InvoiceItemResponseDto> books;

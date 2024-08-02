@@ -39,9 +39,7 @@ public class Constants {
     public static final String REQUIRED_PASSWORD = "Debe ingresar una contraseña";
     public static final String REQUIRED_PHONE = "Debe ingresar un número telefónico";
     public static final String REQUIRED_SECTION_ID = "Debe ingresar el ID de una sección registrada";
-    public static final String REQUIRED_START_DATE = "Debe establecer una fecha de incio";
     public static final String REQUIRED_STOCK = "Debe ingresar un stock mayor a 0";
-    public static final String REQUIRED_USER_ID = "Debe ingresar el ID de un usuario registrado";
     public static final String REQUIRED_USERNAME = "Debe ingresar un usuario";
     public static final String ADMIN_ROLE = "hasAuthority('ADMIN')";
     public static final String SUCCESS = "Operación exitosa";
