@@ -1,4 +1,4 @@
-package com.cloudlabs.library.service;
+package com.cloudlabs.library.service.common;
 
 import com.cloudlabs.library.model.Book;
 

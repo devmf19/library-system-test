@@ -7,7 +7,7 @@ import com.cloudlabs.library.model.Book;
 import com.cloudlabs.library.model.Invoice;
 import com.cloudlabs.library.model.InvoiceItem;
 import com.cloudlabs.library.repository.InvoiceItemRepository;
-import com.cloudlabs.library.service.FindSaveBookService;
+import com.cloudlabs.library.service.common.FindSaveBookService;
 import com.cloudlabs.library.service.InvoiceItemService;
 import com.cloudlabs.library.util.Constants;
 import jakarta.persistence.EntityNotFoundException;

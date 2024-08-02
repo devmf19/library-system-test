@@ -6,10 +6,10 @@ import com.cloudlabs.library.mapper.BookMapper;
 import com.cloudlabs.library.model.Author;
 import com.cloudlabs.library.model.Book;
 import com.cloudlabs.library.model.Section;
-import com.cloudlabs.library.repository.AuthorRepository;
 import com.cloudlabs.library.repository.BookRepository;
-import com.cloudlabs.library.repository.SectionRepository;
 import com.cloudlabs.library.service.BookService;
+import com.cloudlabs.library.service.common.FindSaveAuthorService;
+import com.cloudlabs.library.service.common.FindSaveSectionService;
 import com.cloudlabs.library.util.Constants;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +24,18 @@ import java.util.Set;
 public class BookServiceImpl extends GenericServiceImpl<Book, Long> implements BookService {
 
     private final BookMapper bookMapper;
-    private final AuthorRepository authorRepository;
-    private final SectionRepository sectionRepository;
+    private final FindSaveAuthorService findSaveAuthorService;
+    private final FindSaveSectionService findSaveSectionService;
 
     @Autowired
     public BookServiceImpl(@Qualifier("bookRepository") BookRepository bookRepository,
                            BookMapper bookMapper,
-                           AuthorRepository authorRepository,
-                           SectionRepository sectionRepository) {
+                           FindSaveAuthorService findSaveAuthorService,
+                           FindSaveSectionService findSaveSectionService) {
         super(bookRepository);
         this.bookMapper = bookMapper;
-        this.authorRepository = authorRepository;
-        this.sectionRepository = sectionRepository;
+        this.findSaveAuthorService = findSaveAuthorService;
+        this.findSaveSectionService = findSaveSectionService;
     }
 
     @Override
@@ -49,14 +49,14 @@ public class BookServiceImpl extends GenericServiceImpl<Book, Long> implements B
         Set<Author> authors = new HashSet<>();
 
         bookRequestDto.getAuthorsId().forEach(id -> {
-            Author author = authorRepository.findById(id).orElseThrow(
+            Author author = findSaveAuthorService.get(id).orElseThrow(
                     () -> new EntityNotFoundException(Constants.NOT_FOUND_AUTHOR.concat(id.toString()))
             );
             authors.add(author);
         });
 
-        Section section = sectionRepository.findById(bookRequestDto.getSectionId()).orElseThrow(
-                () -> new EntityNotFoundException(Constants.NOT_FOUND_AUTHOR.concat(bookRequestDto.getSectionId().toString()))
+        Section section = findSaveSectionService.get(bookRequestDto.getSectionId()).orElseThrow(
+                () -> new EntityNotFoundException(Constants.NOT_FOUND_SECTION.concat(bookRequestDto.getSectionId().toString()))
         );
 
         book.setAuthors(authors);

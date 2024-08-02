@@ -1,8 +1,8 @@
-package com.cloudlabs.library.service.impl;
+package com.cloudlabs.library.service.common.impl;
 
 import com.cloudlabs.library.model.Book;
 import com.cloudlabs.library.repository.BookRepository;
-import com.cloudlabs.library.service.FindSaveBookService;
+import com.cloudlabs.library.service.common.FindSaveBookService;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

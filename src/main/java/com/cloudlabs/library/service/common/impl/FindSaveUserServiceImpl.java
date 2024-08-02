@@ -1,8 +1,8 @@
-package com.cloudlabs.library.service.impl;
+package com.cloudlabs.library.service.common.impl;
 
 import com.cloudlabs.library.model.User;
 import com.cloudlabs.library.repository.UserRepository;
-import com.cloudlabs.library.service.FindSaveUserService;
+import com.cloudlabs.library.service.common.FindSaveUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

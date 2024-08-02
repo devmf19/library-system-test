@@ -62,11 +62,18 @@ public class MainSecurity {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui/index.html").permitAll()
+                .requestMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+    private static final String[] AUTH_WHITELIST = {
+            "/auth/**",
+            "/api-docs/**",
+            "/swagger-ui.html",
+            "/swagger-ui/**"
+    };
 }
