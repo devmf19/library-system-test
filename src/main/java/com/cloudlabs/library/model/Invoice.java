@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "invoice")
@@ -18,10 +18,10 @@ public class Invoice {
     private Long id;
 
     @Column(name = "start_date", nullable = false)
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(name = "final_date", nullable = false)
-    private LocalDateTime finalDate;
+    private LocalDate finalDate;
 
     @Column(name = "comments")
     private String comments;

@@ -17,6 +17,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @Configuration
 @EnableWebSecurity
@@ -52,6 +60,17 @@ public class MainSecurity {
     }
 
     @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+    @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf()
                 .disable()
@@ -62,11 +81,26 @@ public class MainSecurity {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui/index.html").permitAll()
+                .requestMatchers(AUTH_WHITELIST).permitAll()
+                .requestMatchers(toH2Console()).permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .csrf().ignoringRequestMatchers(toH2Console())
+                .and()
+                .csrf().ignoringRequestMatchers(AUTH_WHITELIST)
+                .and()
+                .headers().frameOptions().sameOrigin()
+                .and()
                 .httpBasic();
+
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
+    private static final String[] AUTH_WHITELIST = {
+            "/auth/**",
+            "/api-docs/**",
+            "/swagger-ui.html",
+            "/swagger-ui/**"
+    };
 }

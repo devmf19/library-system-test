@@ -27,6 +27,7 @@ public class Constants {
     public static final String NOT_FOUND_SECTION = "No se ha encontrado una sección con id ";
     public static final String NOT_FOUND_USER = "No se ha encontrado un usuario con id ";
     public static final String OLD_BOOK_LOAN_RECEIVED = "Este préstamo ya fue devuelto";
+    public static final String PHONE_LENGTH_ERROR = "El teléfono debe contener mínimo 7 dígitos y máximo 10";
     public static final String RECEIVED_BOOK_LOAN = "Devolución recibida. Id de préstamo: ";
     public static final String REQUIRED_ADDRESS = "Debe ingresar una dirección";
     public static final String REQUIRED_AUTHORS_ID = "Debe ingresar al menos un ID de autor";
@@ -38,9 +39,7 @@ public class Constants {
     public static final String REQUIRED_PASSWORD = "Debe ingresar una contraseña";
     public static final String REQUIRED_PHONE = "Debe ingresar un número telefónico";
     public static final String REQUIRED_SECTION_ID = "Debe ingresar el ID de una sección registrada";
-    public static final String REQUIRED_START_DATE = "Debe establecer una fecha de incio";
     public static final String REQUIRED_STOCK = "Debe ingresar un stock mayor a 0";
-    public static final String REQUIRED_USER_ID = "Debe ingresar el ID de un usuario registrado";
     public static final String REQUIRED_USERNAME = "Debe ingresar un usuario";
     public static final String ADMIN_ROLE = "hasAuthority('ADMIN')";
     public static final String SUCCESS = "Operación exitosa";

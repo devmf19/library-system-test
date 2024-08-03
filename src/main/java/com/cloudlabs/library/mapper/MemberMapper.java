@@ -12,8 +12,10 @@ import java.util.List;
 public interface MemberMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "phone", source = "phone")
     Member toEntity(MemberRequestDto memberRequestDto);
 
+    @Mapping(target = "phone", source = "phone")
     MemberResponseDto toResponse(Member member);
 
     List<MemberResponseDto> toResponseList (List<Member> members);
